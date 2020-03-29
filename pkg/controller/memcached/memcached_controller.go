@@ -118,7 +118,7 @@ func (r *ReconcileMemcached) Reconcile(request reconcile.Request) (reconcile.Res
 		}
 
 		// Depoyment created successfully
-		return reconcile.Result{Requeue: True}, nil
+		return reconcile.Result{Requeue: true}, nil
 	} else if err != nil {
 		reqLogger.Error(err, "Failed to get Deployment")
 		return reconcile.Result{}, err
@@ -134,7 +134,7 @@ func (r *ReconcileMemcached) Reconcile(request reconcile.Request) (reconcile.Res
 			return reconcile.Result{}, err
 		}
 		// Spec update. return and requeue
-		return reconcile.Result{Requeue: True}, nil
+		return reconcile.Result{Requeue: true}, nil
 	}
 
 	// Update the Memcached status with the Pod names
@@ -188,7 +188,7 @@ func (r *ReconcileMemcached) deploymentForMemcached(m *cachev1alpha1.Memcached) 
 					Containers: []corev1.Container{
 						{
 							Image:   "memcached:1.4.36-alpine",
-							Name:    "Memcached",
+							Name:    "memcached",
 							Command: []string{"memcached", "-m=64", "-o", "modern", "-v"},
 							Ports:   []corev1.ContainerPort{
 								{
